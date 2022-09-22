@@ -20,6 +20,8 @@ class BenchSuite(BenchSuite):
     """Benchmarking for dot-accessible dict packages in python
 
     [![deps](https://img.shields.io/librariesio/release/pypi/dotdict-bench?style=flat-square)](https://libraries.io/github/pwwang/dotdict-bench#repository_dependencies)
+
+    More test ideas? [Submit an issue](https://github.com/pwwang/dotdict-bench/issues)!
     """
     set_classes = [
         BenchSetPackageInfo,

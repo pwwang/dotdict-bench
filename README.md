@@ -4,10 +4,12 @@ Benchmarking for dot-accessible dict packages in python
 
 [![deps](https://img.shields.io/librariesio/release/pypi/dotdict-bench?style=flat-square)](https://libraries.io/github/pwwang/dotdict-bench#repository_dependencies)
 
+More test ideas? [Submit an issue](https://github.com/pwwang/dotdict-bench/issues)!
+
 
 ## Package Information
 
-As of 2022-09-21 23:09:59.342460
+As of 2022-09-21 23:11:19.354375
 
 |Package|Version|Last Commit|Stars|Forks|Description|
 |-------|-------|-----------|-----|-----|-----------|
@@ -137,14 +139,14 @@ Literally, accessing values from `{"keys": 1, "__name__": 2}`
 
 |Package|`obj.keys`|`obj['keys']`|`obj.__name__`|`obj['__name__']`|
 |---|---|---|---|---|
-|<a target="_blank" href="https://github.com/mewwts/addict">addict</a>|`<built-in method keys of Dict object at 0x7f210cf6b540>`|`1`|`2`|`2`|
+|<a target="_blank" href="https://github.com/mewwts/addict">addict</a>|`<built-in method keys of Dict object at 0x7f4455a49c70>`|`1`|`2`|`2`|
 |<a target="_blank" href="https://github.com/cdgriffith/Box">python-box</a>|`<bound method Box.keys of Box({'keys': 1, '__name__': 2})>`|`1`|`2`|`2`|
 |<a target="_blank" href="https://github.com/drgrib/dotmap">dotmap</a>|`<bound method DotMap.keys of DotMap(keys=1, __name__=2)>`|`1`|`AttributeError: __name__`|`2`|
 |<a target="_blank" href="https://github.com/rnag/dotwiz">dotwiz</a>|`1`|`1`|`2`|`2`|
 |<a target="_blank" href="https://github.com/makinacorpus/easydict">easydict</a>|`1`|`1`|`2`|`2`|
-|<a target="_blank" href="https://github.com/polydojo/dotsi">dotsi</a>|`<built-in method keys of DotsiDict object at 0x7f210c733d10>`|`1`|`2`|`2`|
+|<a target="_blank" href="https://github.com/polydojo/dotsi">dotsi</a>|`<built-in method keys of DotsiDict object at 0x7f4455a49c70>`|`1`|`2`|`2`|
 |<a target="_blank" href="https://github.com/srevenant/dictlib">dictlib</a>|`Can't create`|`Can't create`|`Can't create`|`Can't create`|
-|<a target="_blank" href="https://github.com/pwwang/diot">diot</a>|`<built-in method keys of Diot object at 0x7f210cf6b540>`|`1`|`2`|`2`|
+|<a target="_blank" href="https://github.com/pwwang/diot">diot</a>|`<built-in method keys of Diot object at 0x7f4455a49c70>`|`1`|`2`|`2`|
 
 ## Accessing dashed keys
 
