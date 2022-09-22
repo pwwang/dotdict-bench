@@ -1,4 +1,5 @@
 from __future__ import annotations
+from ast import Dict
 
 import json
 from abc import ABC, abstractproperty
@@ -9,7 +10,6 @@ from typing import TYPE_CHECKING, Mapping
 
 import addict
 import box
-import glom
 import dotmap
 import dotwiz
 import easydict
@@ -79,6 +79,9 @@ class APIBase(BenchAPI, ABC):
     def version(self) -> str:
         return im.version(self._name)
 
+    def create(self, data: Dict) -> Dict:
+        return self.package.Dict(data)
+
 
 class AddictAPI(APIBase):
 
@@ -95,12 +98,8 @@ class BoxAPI(APIBase):
     def _name(self) -> str:
         return "python-box"
 
-
-class GlomAPI(APIBase):
-
-    package = glom
-    repo = "mahmoud/glom"
-    access_way = "`glom(<dict>, 'a.b.c')`"
+    def create(self, data: Dict) -> Dict:
+        return self.package.Box(data)
 
 
 class DotMapAPI(APIBase):
@@ -108,17 +107,26 @@ class DotMapAPI(APIBase):
     package = dotmap
     repo = "drgrib/dotmap"
 
+    def create(self, data: Dict) -> Dict:
+        return self.package.DotMap(data)
+
 
 class DotwizAPI(APIBase):
 
     package = dotwiz
     repo = "rnag/dotwiz"
 
+    def create(self, data: Dict) -> Dict:
+        return self.package.DotWiz(data)
+
 
 class EasydictAPI(APIBase):
 
     package = easydict
     repo = "makinacorpus/easydict"
+
+    def create(self, data: Dict) -> Dict:
+        return self.package.EasyDict(data)
 
 
 class DotsiAPI(APIBase):
@@ -141,3 +149,6 @@ class DiotAPI(APIBase):
 
     package = diot
     repo = "pwwang/diot"
+
+    def create(self, data: Dict) -> Dict:
+        return self.package.Diot(data)

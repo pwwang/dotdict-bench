@@ -1,7 +1,15 @@
 from pyparam import Params
 from benchwork import BenchSuite, run_suite
 
-from .sets import BenchSetPackageInfo, BenchSetAccessValue
+from .sets import (
+    BenchSetPackageInfo,
+    BenchSetCreatingDict,
+    BenchSetCreatingDictWithPresevedKeys,
+    BenchSetCreatingDictWithMagicKeys,
+    BenchSetAccessValue,
+    BenchSetAutomaticHierarchy,
+    BenchSetConflictKeys,
+)
 
 
 class BenchSuite(BenchSuite):
@@ -9,7 +17,15 @@ class BenchSuite(BenchSuite):
 
     [![deps](https://img.shields.io/librariesio/release/pypi/dotdict-bench?style=flat-square)](https://libraries.io/github/pwwang/dotdict-bench#repository_dependencies)
     """
-    set_classes = [BenchSetPackageInfo, BenchSetAccessValue]
+    set_classes = [
+        BenchSetPackageInfo,
+        BenchSetCreatingDict,
+        BenchSetCreatingDictWithPresevedKeys,
+        BenchSetCreatingDictWithMagicKeys,
+        BenchSetAccessValue,
+        BenchSetAutomaticHierarchy,
+        BenchSetConflictKeys,
+    ]
 
 
 def main():
