@@ -9,6 +9,7 @@ from .cases import (
     BenchCaseAccessValue,
     BenchCaseAutomaticHierarchy,
     BenchCasePreservedKeys,
+    BenchCaseDashKeys,
 )
 from .apis import APIBase
 from .utils import format_doc
@@ -108,6 +109,29 @@ class BenchSetConflictKeys(BenchSet):
             "|Package|`obj.keys`|`obj['keys']`"
             "|`obj.__name__`|`obj['__name__']`|",
             f"|---|---|---|---|---|",
+        ]
+        for case in self.cases:
+            ret = case.run()
+            ret = [str(r).replace("\n", "<br />") for r in ret]
+            ret = [f"`{r}`" for r in ret]
+            out.append(f"|{case.api.name}|{'|'.join(ret)}|")
+        return "\n".join(out)
+
+
+class BenchSetDashKeys(BenchSet):
+    """How the values with keys with dash are accessed
+
+    Literally `<dict>.a_b` for `{"a-b": 1}`
+    """
+
+    api_base = APIBase
+    case = BenchCaseDashKeys
+    title = "Accessing dashed keys"
+
+    def run_cases(self):
+        out = [
+            "|Package|`obj.a_b`|`obj['a_b']`|`obj['a-b']`|",
+            f"|---|---|---|---|",
         ]
         for case in self.cases:
             ret = case.run()

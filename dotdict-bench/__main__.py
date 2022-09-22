@@ -9,6 +9,7 @@ from .sets import (
     BenchSetAccessValue,
     BenchSetAutomaticHierarchy,
     BenchSetConflictKeys,
+    BenchSetDashKeys,
 )
 
 
@@ -25,6 +26,7 @@ class BenchSuite(BenchSuite):
         BenchSetAccessValue,
         BenchSetAutomaticHierarchy,
         BenchSetConflictKeys,
+        BenchSetDashKeys,
     ]
 
 

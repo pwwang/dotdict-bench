@@ -7,7 +7,7 @@ Benchmarking for dot-accessible dict packages in python
 
 ## Package Information
 
-As of 2022-09-21 22:17:07.486334
+As of 2022-09-21 22:26:02.852906
 
 |Package|Version|Last Commit|Stars|Forks|Description|
 |-------|-------|-----------|-----|-----|-----------|
@@ -118,12 +118,30 @@ Literally, accessing values from `{"keys": 1, "__name__": 2}`
 
 |Package|`obj.keys`|`obj['keys']`|`obj.__name__`|`obj['__name__']`|
 |---|---|---|---|---|
-|<a target="_blank" href="https://github.com/mewwts/addict">addict</a>|`<built-in method keys of Dict object at 0x7fa6dd61ae50>`|`1`|`2`|`2`|
+|<a target="_blank" href="https://github.com/mewwts/addict">addict</a>|`<built-in method keys of Dict object at 0x7f0192d16b30>`|`1`|`2`|`2`|
 |<a target="_blank" href="https://github.com/cdgriffith/Box">python-box</a>|`<bound method Box.keys of Box({'keys': 1, '__name__': 2})>`|`1`|`2`|`2`|
 |<a target="_blank" href="https://github.com/drgrib/dotmap">dotmap</a>|`<bound method DotMap.keys of DotMap(keys=1, __name__=2)>`|`1`|`AttributeError: __name__`|`2`|
 |<a target="_blank" href="https://github.com/rnag/dotwiz">dotwiz</a>|`1`|`1`|`2`|`2`|
 |<a target="_blank" href="https://github.com/makinacorpus/easydict">easydict</a>|`1`|`1`|`2`|`2`|
-|<a target="_blank" href="https://github.com/polydojo/dotsi">dotsi</a>|`<built-in method keys of DotsiDict object at 0x7fa6dd95d5e0>`|`1`|`2`|`2`|
+|<a target="_blank" href="https://github.com/polydojo/dotsi">dotsi</a>|`<built-in method keys of DotsiDict object at 0x7f01943864f0>`|`1`|`2`|`2`|
 |<a target="_blank" href="https://github.com/srevenant/dictlib">dictlib</a>|`Can't create`|`Can't create`|`Can't create`|`Can't create`|
-|<a target="_blank" href="https://github.com/pwwang/diot">diot</a>|`<built-in method keys of Diot object at 0x7fa6dd61ae50>`|`1`|`2`|`2`|
+|<a target="_blank" href="https://github.com/pwwang/diot">diot</a>|`<built-in method keys of Diot object at 0x7f0192d16b30>`|`1`|`2`|`2`|
+
+## Accessing dashed keys
+
+How the values with keys with dash are accessed
+
+Literally `<dict>.a_b` for `{"a-b": 1}`
+
+
+|Package|`obj.a_b`|`obj['a_b']`|`obj['a-b']`|
+|---|---|---|---|
+|<a target="_blank" href="https://github.com/mewwts/addict">addict</a>|`{}`|`{}`|`1`|
+|<a target="_blank" href="https://github.com/cdgriffith/Box">python-box</a>|`1`|`KeyError: "'a_b'"`|`1`|
+|<a target="_blank" href="https://github.com/drgrib/dotmap">dotmap</a>|`DotMap()`|`DotMap()`|`1`|
+|<a target="_blank" href="https://github.com/rnag/dotwiz">dotwiz</a>|`AttributeError: 'DotWiz' object has no attribute 'a_b'`|`KeyError: 'a_b'`|`1`|
+|<a target="_blank" href="https://github.com/makinacorpus/easydict">easydict</a>|`AttributeError: 'EasyDict' object has no attribute 'a_b'`|`KeyError: 'a_b'`|`1`|
+|<a target="_blank" href="https://github.com/polydojo/dotsi">dotsi</a>|`KeyError: 'a_b'`|`KeyError: 'a_b'`|`1`|
+|<a target="_blank" href="https://github.com/srevenant/dictlib">dictlib</a>|`1`|`1`|`1`|
+|<a target="_blank" href="https://github.com/pwwang/diot">diot</a>|`1`|`1`|`1`|
 

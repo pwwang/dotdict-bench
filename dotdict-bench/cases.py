@@ -128,3 +128,45 @@ class BenchCasePreservedKeys(BenchCase):
         out.append(o)
 
         return out
+
+
+class BenchCaseDashKeys(BenchCase):
+
+    def run(self):
+        out = []
+        try:
+            d = self.api.create({"a-b": 1})
+        except Exception:
+            return ["Can't create"] * 3
+
+        try:
+            o = d.a_b
+        except KeyError as e1:
+            o = f"KeyError: {e1}"
+        except AttributeError as e2:
+            o = f"AttributeError: {e2}"
+        except Exception as e3:
+            o = str(e3)
+        out.append(o)
+
+        try:
+            o = d["a_b"]
+        except KeyError as e1:
+            o = f"KeyError: {e1}"
+        except AttributeError as e2:
+            o = f"AttributeError: {e2}"
+        except Exception as e3:
+            o = str(e3)
+        out.append(o)
+
+        try:
+            o = d["a-b"]
+        except KeyError as e1:
+            o = f"KeyError: {e1}"
+        except AttributeError as e2:
+            o = f"AttributeError: {e2}"
+        except Exception as e3:
+            o = str(e3)
+        out.append(o)
+
+        return out
