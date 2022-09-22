@@ -7,9 +7,12 @@ from .sets import (
     BenchSetCreatingDictWithPresevedKeys,
     BenchSetCreatingDictWithMagicKeys,
     BenchSetAccessValue,
+    BenchSetRecursiveDotAccess,
     BenchSetAutomaticHierarchy,
     BenchSetConflictKeys,
     BenchSetDashKeys,
+    BenchSetFrozenDict,
+    BenchSetKeyTransform,
 )
 
 
@@ -24,9 +27,12 @@ class BenchSuite(BenchSuite):
         BenchSetCreatingDictWithPresevedKeys,
         BenchSetCreatingDictWithMagicKeys,
         BenchSetAccessValue,
+        BenchSetRecursiveDotAccess,
         BenchSetAutomaticHierarchy,
         BenchSetConflictKeys,
         BenchSetDashKeys,
+        BenchSetFrozenDict,
+        BenchSetKeyTransform,
     ]
 
 

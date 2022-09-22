@@ -64,6 +64,20 @@ class BenchCaseAccessValue(BenchCase):
         return self.api.access_way
 
 
+class BenchCaseRecursiveDotAccess(BenchCase):
+
+    def run(self):
+        d = self.api.create({"a": {"b": [{"c": 1}, {"d": 2}]}})
+        try:
+            o = d.a.b[0].c
+        except KeyError as e1:
+            return f"KeyError: {e1}"
+        except AttributeError as e2:
+            return f"AttributeError: {e2}"
+        else:
+            return f"`{o}`"
+
+
 class BenchCaseAutomaticHierarchy(BenchCase):
 
     def run(self):
@@ -170,3 +184,15 @@ class BenchCaseDashKeys(BenchCase):
         out.append(o)
 
         return out
+
+
+class BenchCaseFrozenDict(BenchCase):
+
+    def run(self):
+        return self.api.freeze
+
+
+class BenchCaseKeyTransform(BenchCase):
+
+    def run(self):
+        return self.api.key_transform

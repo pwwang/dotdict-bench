@@ -1,5 +1,6 @@
 from __future__ import annotations
 from ast import Dict
+from gc import freeze
 
 import json
 from abc import ABC, abstractproperty
@@ -79,6 +80,14 @@ class APIBase(BenchAPI, ABC):
     def version(self) -> str:
         return im.version(self._name)
 
+    @property
+    def freeze(self) -> str:
+        return "Not supported"
+
+    @property
+    def key_transform(self) -> str:
+        return "Not supported"
+
     def create(self, data: Dict) -> Dict:
         return self.package.Dict(data)
 
@@ -87,12 +96,15 @@ class AddictAPI(APIBase):
 
     package = addict
     repo = "mewwts/addict"
+    freeze = "`<dict>.freeze()/.unfreeze()`"
 
 
 class BoxAPI(APIBase):
 
     package = box
     repo = "cdgriffith/Box"
+    freeze = "`Box(<dict>, frozen_box=True)`"
+    key_transform = "Using Conversion Box or Camel Killer Box"
 
     @property
     def _name(self) -> str:
@@ -115,6 +127,10 @@ class DotwizAPI(APIBase):
 
     package = dotwiz
     repo = "rnag/dotwiz"
+    key_transform = (
+        "`DotWizPlus` turns special-cased keys, such as names with spaces, "
+        "into valid snake_case words"
+    )
 
     def create(self, data: Dict) -> Dict:
         return self.package.DotWiz(data)
@@ -149,6 +165,10 @@ class DiotAPI(APIBase):
 
     package = diot
     repo = "pwwang/diot"
+    freeze = "`FrozenDiot(<dict>)` or `Diot(<dict>, diot_frozen=True)`"
+    key_transform = (
+        "Support custom transform function: `Diot(..., diot_transform =...)`"
+    )
 
     def create(self, data: Dict) -> Dict:
         return self.package.Diot(data)

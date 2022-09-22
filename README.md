@@ -7,7 +7,7 @@ Benchmarking for dot-accessible dict packages in python
 
 ## Package Information
 
-As of 2022-09-21 22:26:02.852906
+As of 2022-09-21 23:09:59.342460
 
 |Package|Version|Last Commit|Stars|Forks|Description|
 |-------|-------|-----------|-----|-----|-----------|
@@ -91,6 +91,25 @@ Literally `1` from `{"a": {"b": {"c": 1}}}`
 |<a target="_blank" href="https://github.com/srevenant/dictlib">dictlib</a>|`dictlib.dig(<dict>, 'a.b.c')` or `dictlib.Dict(<dict>).a.b.c`|
 |<a target="_blank" href="https://github.com/pwwang/diot">diot</a>|`<dict>.a.b.c` or `<dict>['a']['b']['c']`|
 
+## Recursive Dot Access
+
+Whether recursive dot access is supported when there are lists
+in the dict
+
+Literally `<dict>.a.b[0].c` from `{"a": {"b": [{"c": 1}, {"d": 2}]}}`
+
+
+| |Value or error|
+|-|-----------------------|
+|<a target="_blank" href="https://github.com/mewwts/addict">addict</a>|`1`|
+|<a target="_blank" href="https://github.com/cdgriffith/Box">python-box</a>|`1`|
+|<a target="_blank" href="https://github.com/drgrib/dotmap">dotmap</a>|`1`|
+|<a target="_blank" href="https://github.com/rnag/dotwiz">dotwiz</a>|`1`|
+|<a target="_blank" href="https://github.com/makinacorpus/easydict">easydict</a>|`1`|
+|<a target="_blank" href="https://github.com/polydojo/dotsi">dotsi</a>|`1`|
+|<a target="_blank" href="https://github.com/srevenant/dictlib">dictlib</a>|AttributeError: 'dict' object has no attribute 'c'|
+|<a target="_blank" href="https://github.com/pwwang/diot">diot</a>|`1`|
+
 ## Automatic Hierarchy
 
 Whether a hierarchical structure is created by dot notation
@@ -118,14 +137,14 @@ Literally, accessing values from `{"keys": 1, "__name__": 2}`
 
 |Package|`obj.keys`|`obj['keys']`|`obj.__name__`|`obj['__name__']`|
 |---|---|---|---|---|
-|<a target="_blank" href="https://github.com/mewwts/addict">addict</a>|`<built-in method keys of Dict object at 0x7f0192d16b30>`|`1`|`2`|`2`|
+|<a target="_blank" href="https://github.com/mewwts/addict">addict</a>|`<built-in method keys of Dict object at 0x7f210cf6b540>`|`1`|`2`|`2`|
 |<a target="_blank" href="https://github.com/cdgriffith/Box">python-box</a>|`<bound method Box.keys of Box({'keys': 1, '__name__': 2})>`|`1`|`2`|`2`|
 |<a target="_blank" href="https://github.com/drgrib/dotmap">dotmap</a>|`<bound method DotMap.keys of DotMap(keys=1, __name__=2)>`|`1`|`AttributeError: __name__`|`2`|
 |<a target="_blank" href="https://github.com/rnag/dotwiz">dotwiz</a>|`1`|`1`|`2`|`2`|
 |<a target="_blank" href="https://github.com/makinacorpus/easydict">easydict</a>|`1`|`1`|`2`|`2`|
-|<a target="_blank" href="https://github.com/polydojo/dotsi">dotsi</a>|`<built-in method keys of DotsiDict object at 0x7f01943864f0>`|`1`|`2`|`2`|
+|<a target="_blank" href="https://github.com/polydojo/dotsi">dotsi</a>|`<built-in method keys of DotsiDict object at 0x7f210c733d10>`|`1`|`2`|`2`|
 |<a target="_blank" href="https://github.com/srevenant/dictlib">dictlib</a>|`Can't create`|`Can't create`|`Can't create`|`Can't create`|
-|<a target="_blank" href="https://github.com/pwwang/diot">diot</a>|`<built-in method keys of Diot object at 0x7f0192d16b30>`|`1`|`2`|`2`|
+|<a target="_blank" href="https://github.com/pwwang/diot">diot</a>|`<built-in method keys of Diot object at 0x7f210cf6b540>`|`1`|`2`|`2`|
 
 ## Accessing dashed keys
 
@@ -144,4 +163,37 @@ Literally `<dict>.a_b` for `{"a-b": 1}`
 |<a target="_blank" href="https://github.com/polydojo/dotsi">dotsi</a>|`KeyError: 'a_b'`|`KeyError: 'a_b'`|`1`|
 |<a target="_blank" href="https://github.com/srevenant/dictlib">dictlib</a>|`1`|`1`|`1`|
 |<a target="_blank" href="https://github.com/pwwang/diot">diot</a>|`1`|`1`|`1`|
+
+## Frozen Dict Support
+
+Whether the packages support frozen dicts
+
+| |Support? and how?|
+|-|-----------------------|
+|<a target="_blank" href="https://github.com/mewwts/addict">addict</a>|`<dict>.freeze()/.unfreeze()`|
+|<a target="_blank" href="https://github.com/cdgriffith/Box">python-box</a>|`Box(<dict>, frozen_box=True)`|
+|<a target="_blank" href="https://github.com/drgrib/dotmap">dotmap</a>|Not supported|
+|<a target="_blank" href="https://github.com/rnag/dotwiz">dotwiz</a>|Not supported|
+|<a target="_blank" href="https://github.com/makinacorpus/easydict">easydict</a>|Not supported|
+|<a target="_blank" href="https://github.com/polydojo/dotsi">dotsi</a>|Not supported|
+|<a target="_blank" href="https://github.com/srevenant/dictlib">dictlib</a>|Not supported|
+|<a target="_blank" href="https://github.com/pwwang/diot">diot</a>|`FrozenDiot(<dict>)` or `Diot(<dict>, diot_frozen=True)`|
+
+## Key transformation support
+
+Whether the packages support key transformation for dot access
+
+For example: making `<dict>.a_b` to access value from `{"a.b": 1}`
+
+
+| |Support? and how?|
+|-|-----------------------|
+|<a target="_blank" href="https://github.com/mewwts/addict">addict</a>|Not supported|
+|<a target="_blank" href="https://github.com/cdgriffith/Box">python-box</a>|Using Conversion Box or Camel Killer Box|
+|<a target="_blank" href="https://github.com/drgrib/dotmap">dotmap</a>|Not supported|
+|<a target="_blank" href="https://github.com/rnag/dotwiz">dotwiz</a>|`DotWizPlus` turns special-cased keys, such as names with spaces, into valid snake_case words|
+|<a target="_blank" href="https://github.com/makinacorpus/easydict">easydict</a>|Not supported|
+|<a target="_blank" href="https://github.com/polydojo/dotsi">dotsi</a>|Not supported|
+|<a target="_blank" href="https://github.com/srevenant/dictlib">dictlib</a>|Not supported|
+|<a target="_blank" href="https://github.com/pwwang/diot">diot</a>|Support custom transform function: `Diot(..., diot_transform =...)`|
 

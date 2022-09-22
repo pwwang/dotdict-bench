@@ -7,9 +7,12 @@ from .cases import (
     BenchCaseCreatingDictWithPresevedKeys,
     BenchCaseCreatingDictWithMagicKeys,
     BenchCaseAccessValue,
+    BenchCaseRecursiveDotAccess,
     BenchCaseAutomaticHierarchy,
     BenchCasePreservedKeys,
     BenchCaseDashKeys,
+    BenchCaseFrozenDict,
+    BenchCaseKeyTransform,
 )
 from .apis import APIBase
 from .utils import format_doc
@@ -82,6 +85,19 @@ class BenchSetAccessValue(BenchSetTable):
     header = "Way to access value"
 
 
+class BenchSetRecursiveDotAccess(BenchSetTable):
+    """Whether recursive dot access is supported when there are lists
+    in the dict
+
+    Literally `<dict>.a.b[0].c` from `{"a": {"b": [{"c": 1}, {"d": 2}]}}`
+    """
+
+    api_base = APIBase
+    case = BenchCaseRecursiveDotAccess
+    title = "Recursive Dot Access"
+    header = "Value or error"
+
+
 class BenchSetAutomaticHierarchy(BenchSetTable):
     """Whether a hierarchical structure is created by dot notation
 
@@ -139,3 +155,24 @@ class BenchSetDashKeys(BenchSet):
             ret = [f"`{r}`" for r in ret]
             out.append(f"|{case.api.name}|{'|'.join(ret)}|")
         return "\n".join(out)
+
+
+class BenchSetFrozenDict(BenchSetTable):
+    """Whether the packages support frozen dicts"""
+
+    api_base = APIBase
+    case = BenchCaseFrozenDict
+    title = "Frozen Dict Support"
+    header = "Support? and how?"
+
+
+class BenchSetKeyTransform(BenchSetTable):
+    """Whether the packages support key transformation for dot access
+
+    For example: making `<dict>.a_b` to access value from `{"a.b": 1}`
+    """
+
+    api_base = APIBase
+    case = BenchCaseKeyTransform
+    title = "Key transformation support"
+    header = "Support? and how?"
